@@ -3,10 +3,10 @@ package 자동차만들기;
 public class Bus extends Car {
     public Bus(String name) {
         super(name);
-        this.setSpeed(250);
-        this.setFuel(8);
-        this.setTankSize(30);
-        this.setSeatNum(2);
+        this.setSpeed(150);
+        this.setFuel(5);
+        this.setTankSize(100);
+        this.setSeatNum(20);
     }
 
     @Override
