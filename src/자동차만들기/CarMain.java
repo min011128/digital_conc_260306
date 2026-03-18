@@ -51,6 +51,7 @@ public class CarMain {
             }
             System.out.print("날씨 선택 [1]맑음 [2]비 [3]눈 : ");
             int weatherChoice = sc.nextInt();
+            sc.nextLine();
             double weatherWeight = 0; // 날씨 초기화
             if (weatherChoice == 1) {
                 weatherWeight = 1.0;  // 맑음에 대한 보정 계수
@@ -62,7 +63,31 @@ public class CarMain {
                 System.out.println("날씨 선택이 잘못되었습니다.");
                 continue;
             }
-            System.out.println("\n=====" + myCar.getCarName() + "=====");
+                System.out.println("\n--- 상세 기능 설정 ---");
+                if (myCar instanceof CarAirCon) {
+                    System.out.print(myCar.getCarName() + " 에어컨 [1]ON [2]OFF : ");
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    ((CarAirCon) myCar).setCarAirCon(choice);
+                    System.out.println(myCar.getCarName() + ": 에어컨 " + (choice == 1 ? "ON" : "OFF"));
+                }
+                if (myCar instanceof Audio) {
+                    System.out.print(myCar.getCarName() + " 오디오 [1]ON [2]OFF : ");
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    ((Audio) myCar).setAudio(choice);
+                    System.out.println(myCar.getCarName() + ": 오디오 " + (choice == 1 ? "ON" : "OFF"));
+                }
+                if (myCar instanceof AutoPilot) {
+                    System.out.print(myCar.getCarName() + " 자율주행 [1]ON [2]OFF : ");
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    ((AutoPilot) myCar).setAutoPilot(choice);
+                    System.out.println(myCar.getCarName() + ": 자율주행 " + (choice == 1 ? "ON" : "OFF"));
+                }
+                System.out.println("설정 완료");
+
+                System.out.println("\n=====" + myCar.getCarName() + "=====");
             if (isOptionOn) {
                 myCar.applySpecialFunction();
             }
@@ -73,6 +98,16 @@ public class CarMain {
             System.out.printf("총 비용 : %,d원\n", cost);
             System.out.println("총 주유 횟수 : " + refuel + "회");
             System.out.println("총 이동 시간 : " + time);
+            if (myCar instanceof CarAirCon) {
+                String status = ((CarAirCon) myCar).isAirConOn() ? "ON" : "OFF";
+                System.out.println("에어컨 : " + status);
+            }
+            if (myCar instanceof Audio) {
+                System.out.println("오디오 : " + (((Audio)myCar).isAudioOn() ? "ON" : "OFF"));
+            }
+            if (myCar instanceof AutoPilot) {
+                System.out.println("자율주행 : " + (((AutoPilot)myCar).isAutoPilotOn() ? "ON" : "OFF"));
+            }
             break;
 
 
